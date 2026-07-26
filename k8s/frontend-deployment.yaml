@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeclustersnap-frontend
+  namespace: prod
+  labels:
+    app: kubeclustersnap-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubeclustersnap-frontend
+  template:
+    metadata:
+      labels:
+        app: kubeclustersnap-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: kubeclustersnap-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubeclustersnap-frontend-svc
+  namespace: prod
+spec:
+  type: NodePort
+  selector:
+    app: kubeclustersnap-frontend
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30300

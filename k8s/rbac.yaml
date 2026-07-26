@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: kubeclustersnap
+  name: prod
   labels:
     app.kubernetes.io/name: kubeclustersnap
     app.kubernetes.io/part-of: kubeclustersnap-idp
@@ -12,7 +12,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: kubeclustersnap-sa
-  namespace: kubeclustersnap
+  namespace: prod
   labels:
     app.kubernetes.io/name: kubeclustersnap
     app.kubernetes.io/part-of: kubeclustersnap-idp
@@ -67,7 +67,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: kubeclustersnap-sa
-    namespace: kubeclustersnap
+    namespace: prod
 roleRef:
   kind: ClusterRole
   name: kubeclustersnap-role
