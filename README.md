@@ -55,35 +55,33 @@ Read full release details in our [GitHub Release Notes](https://github.com/anilk
 
 ## Community Edition Quick Start & Lifecycle Guide (Helm)
 
-### 1. Initial Installation via Helm
+### 1. Installation & Upgrades via Helm (`helm upgrade --install`)
 
-Deploy KubeClusterSnap to your Kubernetes cluster in a single command using our public Helm chart:
+Deploy or upgrade KubeClusterSnap in your Kubernetes cluster using our public Helm chart. The `--install` flag guarantees seamless initial installation AND future upgrades:
 
 ```bash
-# Install KubeClusterSnap Community Edition via Helm
-helm install kubeclustersnap ./charts/kubeclustersnap --create-namespace -n kubeclustersnap
+# Install or Upgrade KubeClusterSnap via Helm
+helm upgrade --install kubeclustersnap ./charts/kubeclustersnap --create-namespace -n kubeclustersnap
 ```
 
 Open **[http://localhost:30300](http://localhost:30300)** in your browser to access the visual developer dashboard!
 
 ---
 
-### 2. Upgrading to Every New Release (`helm upgrade`)
+### 2. Upgrading for Every New Release
 
-Whenever a new version of KubeClusterSnap is released (e.g. `v2.2.0`), you can upgrade your cluster deployment seamlessly without downtime:
+Whenever a new version of KubeClusterSnap is released (e.g. `v2.2.0`), run `helm upgrade --install`:
 
 ```bash
-# Upgrade your existing Helm release to the latest version
-helm upgrade kubeclustersnap ./charts/kubeclustersnap -n kubeclustersnap
+# Upgrade your deployment to the latest version
+helm upgrade --install kubeclustersnap ./charts/kubeclustersnap -n kubeclustersnap
 ```
 
 #### Upgrading in Custom Namespaces (`dev`, `testing`, `prod`)
 
-If you installed KubeClusterSnap in a custom namespace, specify `-n <namespace>` during upgrade:
-
 ```bash
-# Upgrade release in custom namespace (e.g., 'dev' or 'testing')
-helm upgrade kubeclustersnap ./charts/kubeclustersnap -n testing
+# Upgrade release in custom namespace (e.g., 'testing' or 'dev')
+helm upgrade --install kubeclustersnap ./charts/kubeclustersnap -n testing
 ```
 
 ---
