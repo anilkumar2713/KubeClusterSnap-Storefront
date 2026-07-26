@@ -1,0 +1,59 @@
+# Default values for KubeClusterSnap Helm Chart (Open-Distribution)
+
+# Target Namespace
+namespace: kubeclustersnap
+
+# Enterprise BYOL License Key (Leave empty for Community Edition)
+# Paste your 'KCS-ENT-...' License Key to unlock Enterprise features
+licenseKey: ""
+
+# RBAC Configuration
+rbac:
+  create: true
+  serviceAccountName: kubeclustersnap-sa
+  clusterRoleName: kubeclustersnap-role
+  clusterRoleBindingName: kubeclustersnap-binding
+
+# Backend Control Plane Configuration (Pulls pre-compiled image)
+backend:
+  name: kubeclustersnap-backend
+  replicas: 1
+  image:
+    repository: ghcr.io/anilkumar2713/kubeclustersnap-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 8000
+    targetPort: 8000
+    nodePort: 30800
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  prometheusUrl: "http://prometheus-operated.monitoring.svc.cluster.local:9090"
+
+# Frontend UI Dashboard Configuration (Pulls pre-compiled image)
+frontend:
+  enabled: true
+  name: kubeclustersnap-frontend
+  replicas: 1
+  image:
+    repository: ghcr.io/anilkumar2713/kubeclustersnap-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 3000
+    targetPort: 3000
+    nodePort: 30300
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi

@@ -1,0 +1,15 @@
+apiVersion: v2
+name: kubeclustersnap
+description: Helm Chart for KubeClusterSnap V2 — Ephemeral Environment IDP & Observability Platform
+type: application
+version: 2.1.0
+appVersion: 2.1.0
+keywords:
+  - kubernetes
+  - internal-developer-platform
+  - observability
+  - ephemeral-environments
+  - telemetry
+maintainers:
+  - name: Anil Gottapu
+    email: anilkumargottapu9@gmail.com

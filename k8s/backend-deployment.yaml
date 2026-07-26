@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeclustersnap-backend
+  namespace: kubeclustersnap
+  labels:
+    app: kubeclustersnap-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubeclustersnap-backend
+  template:
+    metadata:
+      labels:
+        app: kubeclustersnap-backend
+    spec:
+      serviceAccountName: kubeclustersnap-sa
+      containers:
+        - name: backend
+          image: kubeclustersnap-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubeclustersnap-backend-svc
+  namespace: kubeclustersnap
+spec:
+  type: NodePort
+  selector:
+    app: kubeclustersnap-backend
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30800

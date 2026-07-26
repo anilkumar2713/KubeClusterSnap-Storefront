@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubeclustersnap
+  labels:
+    app.kubernetes.io/name: kubeclustersnap
+    app.kubernetes.io/part-of: kubeclustersnap-idp
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubeclustersnap-sa
+  namespace: kubeclustersnap
+  labels:
+    app.kubernetes.io/name: kubeclustersnap
+    app.kubernetes.io/part-of: kubeclustersnap-idp
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubeclustersnap-role
+  labels:
+    app.kubernetes.io/name: kubeclustersnap
+    app.kubernetes.io/part-of: kubeclustersnap-idp
+rules:
+  # Core API Group: Manage Namespaces, Pods, and Services
+  - apiGroups: [""]
+    resources:
+      - namespaces
+      - pods
+      - pods/status
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+
+  # Apps API Group: Manage Deployments
+  - apiGroups: ["apps"]
+    resources:
+      - deployments
+      - deployments/status
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubeclustersnap-binding
+  labels:
+    app.kubernetes.io/name: kubeclustersnap
+    app.kubernetes.io/part-of: kubeclustersnap-idp
+subjects:
+  - kind: ServiceAccount
+    name: kubeclustersnap-sa
+    namespace: kubeclustersnap
+roleRef:
+  kind: ClusterRole
+  name: kubeclustersnap-role
+  apiGroup: rbac.authorization.k8s.io
