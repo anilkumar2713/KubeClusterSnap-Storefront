@@ -1,55 +1,84 @@
 # KubeClusterSnap — Visual Kubernetes Developer IDP & Real-Time Control Plane
 
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-k3s%20%7C%20EKS%20%7C%20AKS-blue.svg?logo=kubernetes)](https://k3s.io)
-[![Latest Release](https://img.shields.io/badge/Release-v2.2.0-brightgreen.svg)](https://github.com/anilkumar2713/KubeClusterSnap-Storefront/releases/tag/v2.2.0)
+[![Latest Release](https://img.shields.io/badge/Release-v2.3.0-brightgreen.svg)](https://github.com/anilkumar2713/KubeClusterSnap-Storefront/releases/tag/v2.3.0)
 [![Edition](https://img.shields.io/badge/Edition-Community%20%26%20Enterprise-009688.svg)](#kubeclustersnap-editions)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#intellectual-property--licensing)
 
-**KubeClusterSnap** is the all-in-one visual Internal Developer Platform (IDP) and real-time control plane built for fast-moving developers, engineering leads, and growing tech companies. It eliminates Kubernetes friction by turning complex container orchestration into a sleek, 1-click self-service dashboard.
+**KubeClusterSnap** is the all-in-one visual Internal Developer Platform (IDP) and real-time control plane built for fast-moving developers, engineering leads, and growing tech companies. It eliminates Kubernetes friction by turning complex container orchestration into a sleek, 1-click self-service dashboard with database state snapshotting, interactive container shell access, and real-time observability.
 
 ---
 
-## 🚀 What's New in Release v2.2.0
+## 🚀 What's New in Release v2.3.0
 
+* **📸 Database & Container State Cloning ("Snap" Feature):** 1-click volume snapshotting of container data paths (`/data`, `/var/lib/mysql`, etc.) and instant cloning into new, isolated preview environments pre-hydrated with your state.
 * **Interactive In-Browser Container Terminal (`kubectl exec` over WebSockets):** Open a live TTY shell directly inside running pod containers from the web UI (`xterm.js`).
-* **Multi-Namespace Helm Flexibility:** Seamlessly deploy KubeClusterSnap into any custom namespace (`testing`, `dev`, `prod`) using `.Release.Namespace`.
-* **Security Hardening:** Mandatory API key authentication middleware (`X-KubeClusterSnap-API-Key`) and RFC 1123 custom namespace sanitization.
+* **Hardened RBAC & Security Scoping:** Updated ClusterRole rules with explicit `pods/exec` and `pods/log` permissions for namespace-isolated execution.
+* **Multi-Namespace Helm Flexibility:** Seamlessly deploy or upgrade KubeClusterSnap into any custom namespace (`testing`, `dev`, `prod`) using `.Release.Namespace` and `helm upgrade --install`.
 
-Read full release details in our [GitHub Release Notes](https://github.com/anilkumar2713/KubeClusterSnap-Storefront/releases/tag/v2.2.0).
+Read full release details in our [GitHub Release Notes](https://github.com/anilkumar2713/KubeClusterSnap-Storefront/releases/tag/v2.3.0).
 
 ---
 
 ## What Problem Does KubeClusterSnap Solve?
 
-### 1. Eliminates Local Kubernetes Onboarding Friction
-* **The Problem:** Developers waste hours writing complex `kubectl` manifests, creating namespaces manually, configuring services, and debugging port forwarding just to run local preview environments.
-* **The Solution:** **1-Click Ephemeral Environments.** Developers can spin up isolated, multi-replica container workloads (NGINX, Redis, Node.js, microservices) in seconds with automated namespace isolation.
+### 1. Solves Database & Test State Isolation (The "Snap" Engine)
+* **The Problem:** Developers spend hours generating mock data or trying to reproduce edge-case production bugs because test container environments start completely empty every time.
+* **The Solution:** **1-Click Volume Snapshotting & State Cloning.** Developers can take a instant snapshot of a populated database or application volume (Redis, Postgres, MySQL) and clone it into a brand-new, isolated environment pre-hydrated with the exact same data.
 
-### 2. Instant Visual Observability Without Heavy Setup
+### 2. Eliminates Local Kubernetes Onboarding Friction
+* **The Problem:** Developers waste hours writing complex `kubectl` YAML manifests, creating namespaces manually, configuring services, and debugging port forwarding just to run local preview environments.
+* **The Solution:** **1-Click Self-Service Catalog.** Developers can spin up isolated, multi-replica container workloads (NGINX, Redis, Node.js, or custom images) in seconds with automated namespace isolation and NodePort routing.
+
+### 3. Eliminates CLI Dependency for Triage & Debugging
+* **The Problem:** Debugging a failing container requires context-switching to a terminal window, running `kubectl get pods`, `kubectl exec -it <pod> -- sh`, or `kubectl logs -f`.
+* **The Solution:** **In-Browser Terminal & Log Inspector.** Direct web-based container shell access (`>_ Shell`) and stdout/stderr log inspector (`>_ Logs`) directly from the control plane UI without leaving the browser.
+
+### 4. Instant Visual Observability Without Heavy Setup
 * **The Problem:** Understanding how microservices communicate or finding out why a pod crashed requires digging through raw text logs or setting up heavy, expensive monitoring stacks.
-* **The Solution:** **Built-In Real-Time Control Plane.** Features interactive network topology DAG maps, PromQL CPU/Memory telemetry graphs, live WebSocket cluster event streams, and container stdout/stderr log tailing out-of-the-box.
+* **The Solution:** **Built-In Real-Time Control Plane.** Features interactive network topology DAG maps (ReactFlow), PromQL CPU/Memory telemetry graphs (ECharts), live WebSocket cluster event streams, and aggregate KPI gauges out-of-the-box.
 
-### 3. Developer Self-Service Control
-* **The Problem:** Developers rely on DevOps engineers for basic operations like scaling workloads, restarting deployments, or cleaning up test resources.
-* **The Solution:** **Self-Service Workload Control.** Developers can scale replicas, trigger zero-downtime rolling restarts, inspect live pod logs, run container terminals, and perform 1-click namespace teardowns safely.
+### 5. Developer Self-Service with DevOps Guardrails
+* **The Problem:** Developers constantly rely on DevOps engineers for basic tasks like scaling workloads, triggering restarts, configuring env vars, or cleaning up stale test namespaces.
+* **The Solution:** **Self-Service Workload Control.** Developers can scale replicas, trigger zero-downtime rolling restarts, inject custom environment variables, define CPU/Memory limits, and perform 1-click namespace teardowns safely.
 
 ---
 
-## KubeClusterSnap Editions
+## KubeClusterSnap Feature Matrix & Editions
 
 | Feature | Community Edition (Free) | Enterprise Edition (Production Teams) |
 | :--- | :---: | :---: |
 | **Local k3s Single Cluster Support** | ✅ Included | ✅ Included |
-| **Standard 1-Click Service Catalog** | ✅ Included | ✅ Included |
-| **Real-Time Telemetry & Metric Graphs** | ✅ Included | ✅ Included |
-| **Visual Network Topology Map** | ✅ Included | ✅ Included |
-| **Live Cluster Event Drawer & Pod Logs** | ✅ Included | ✅ Included |
-| **Interactive In-Browser Container Shell (xterm.js)** | ✅ Included | ✅ Included |
+| **Standard 1-Click Service Catalog & Custom Container Provisioner** | ✅ Included | ✅ Included |
+| **Volume State Snapshotting & State Cloning ("Snap" Feature)** | ✅ Included | ✅ Included |
+| **Interactive In-Browser Container TTY Shell (`kubectl exec`)** | ✅ Included | ✅ Included |
+| **Real-Time Telemetry & PromQL Metric Graphs** | ✅ Included | ✅ Included |
+| **Visual Network Topology DAG Map (ReactFlow)** | ✅ Included | ✅ Included |
+| **Live Cluster Event Drawer & Container Log Inspector** | ✅ Included | ✅ Included |
 | **Multi-Cluster Support (AWS EKS / Azure AKS / GCP GKE)** | ❌ | ✅ Included |
 | **Single Sign-On (SSO / OIDC) & Audit Logging** | ❌ | ✅ Included |
 | **FinOps Auto-Sleep & TTL Garbage Collection**| ❌ | ✅ Included |
 | **Custom PromQL Dashboard Builder** | ❌ | ✅ Included |
 | **Production Helm Deployment & 24/7 SLA Support** | ❌ | ✅ Included |
+
+---
+
+## REST & WebSocket API Specification
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/api/v1/environments/launch` | Provision workload (supports custom specs, env vars, target namespace, and `clone_from_snap_id`) |
+| `GET` | `/api/v1/environments` | List all active environments and workload statuses |
+| `POST` | `/api/v1/environments/{name}/snap` | Capture volume snapshot tarball archive from running pod |
+| `GET` | `/api/v1/snapshots` | List all available volume state snapshots |
+| `GET` | `/api/v1/snapshots/download/{snap_id}` | Download volume snapshot archive tarball |
+| `PATCH` | `/api/v1/environments/{name}/scale` | Scale deployment replica count (`{"replicas": N}`) |
+| `POST` | `/api/v1/environments/{name}/restart` | Trigger zero-downtime rolling restart |
+| `GET` | `/api/v1/environments/{name}/pods/{pod_name}/logs` | Fetch container stdout/stderr logs |
+| `GET` | `/api/v1/environments/{name}/topology` | Fetch ReactFlow topology DAG nodes and edges |
+| `DELETE` | `/api/v1/environments/{name}` | Initiate cascading namespace teardown |
+| `WS` | `/ws/environments/{name}/pods/{pod_name}/shell` | Interactive WebSocket TTY container terminal (`kubectl exec`) |
+| `WS` | `/ws/events` | Real-time WebSocket Kubernetes cluster event stream |
 
 ---
 
@@ -70,7 +99,7 @@ Open **[http://localhost:30300](http://localhost:30300)** in your browser to acc
 
 ### 2. Upgrading for Every New Release
 
-Whenever a new version of KubeClusterSnap is released (e.g. `v2.2.0`), run `helm upgrade --install`:
+Whenever a new version of KubeClusterSnap is released (e.g. `v2.3.0`), run `helm upgrade --install`:
 
 ```bash
 # Upgrade your deployment to the latest version

@@ -19,7 +19,7 @@ spec:
       serviceAccountName: kubeclustersnap-sa
       containers:
         - name: backend
-          image: kubeclustersnap-backend:latest
+          image: kubeclustersnap-backend:v2.3.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000

@@ -2,8 +2,8 @@ apiVersion: v2
 name: kubeclustersnap
 description: Helm Chart for KubeClusterSnap V2 — Ephemeral Environment IDP & Observability Platform
 type: application
-version: 2.2.0
-appVersion: 2.2.0
+version: 2.3.0
+appVersion: 2.3.0
 keywords:
   - kubernetes
   - internal-developer-platform
