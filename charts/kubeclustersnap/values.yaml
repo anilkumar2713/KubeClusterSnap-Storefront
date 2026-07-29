@@ -3,6 +3,10 @@
 # Target Namespace
 namespace: kubeclustersnap
 
+# Image Pull Secrets (Required ONLY if your GHCR packages or container registry are private)
+imagePullSecrets: []
+# - name: ghcr-secret
+
 # Enterprise BYOL License Key (Leave empty for Community Edition)
 # Paste your 'KCS-ENT-...' License Key to unlock Enterprise features
 licenseKey: ""
