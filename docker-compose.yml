@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # KubeClusterSnap Control Plane Backend API
+  backend:
+    image: ghcr.io/anilkumar2713/kubeclustersnap-backend:latest
+    container_name: kubeclustersnap-backend
+    restart: unless-stopped
+    ports:
+      - "30800:8000"
+    environment:
+      - KUBECLUSTERSNAP_LICENSE_KEY=KCS-ENT-PROD-3648F75762ED
+      - SNAPSHOT_DIR=/app/snapshots
+      - KUBECONFIG_DIR=/app/kubeconfigs
+    volumes:
+      # Mount host kubeconfig for out-of-the-box local cluster access
+      - ${HOME:-~}/.kube/config:/root/.kube/config:ro
+      - kubeclustersnap-snapshots:/app/snapshots
+      - kubeclustersnap-kubeconfigs:/app/kubeconfigs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # KubeClusterSnap Frontend UI Dashboard
+  frontend:
+    image: ghcr.io/anilkumar2713/kubeclustersnap-frontend:latest
+    container_name: kubeclustersnap-frontend
+    restart: unless-stopped
+    ports:
+      - "30300:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:30800
+    depends_on:
+      - backend
+
+volumes:
+  kubeclustersnap-snapshots:
+    name: kubeclustersnap-snapshots
+  kubeclustersnap-kubeconfigs:
+    name: kubeclustersnap-kubeconfigs
