@@ -14,7 +14,7 @@ Now available with **Dual Distribution Options**: Deploy natively inside Kuberne
 
 ## 🚀 What's New in Release v2.5.0
 
-* **🐳 Standalone Docker Compose Support (`docker-compose.yml`):** Customers and developers can now launch KubeClusterSnap in seconds using `docker compose up -d` without needing Helm or Kubernetes cluster deployment!
+* **🐳 Standalone Docker Compose Support (`docker compose up -d`):** Customers and developers can now launch KubeClusterSnap in seconds using `docker compose up -d` without needing Helm or installing control plane manifests directly into Kubernetes!
 * **🔌 Multi-Kubeconfig & Custom Cluster Connection Manager:** Connect KubeClusterSnap to any custom Kubernetes cluster (remote k3s, AWS EKS, Azure AKS, GCP GKE, Kind, Minikube) by uploading or pasting custom Kubeconfig YAML files directly from the UI or REST API.
 * **⚡ 1-Click Cluster Context Switcher:** Seamlessly switch your entire dashboard observability & control plane context between connected clusters directly from the top Navbar dropdown.
 * **📸 Database & Container State Cloning ("Snap" Feature):** 1-click volume snapshotting of container data paths (`/data`, `/var/lib/mysql`, etc.) and instant cloning into new, isolated preview environments pre-hydrated with your state.
@@ -40,7 +40,10 @@ curl -sSL https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storef
 docker compose up -d
 ```
 
-Open **[http://localhost:30300](http://localhost:30300)** in your browser!
+- **Frontend Dashboard:** Open **[http://localhost:30333](http://localhost:30333)** (or `http://localhost:30300`)
+- **Backend Control API:** **[http://localhost:30888](http://localhost:30888)**
+
+> **Note:** Docker Compose automatically mounts your host `${HOME}/.kube/config` into the control plane container so you can control your local or remote clusters out of the box!
 
 ---
 
@@ -53,7 +56,8 @@ Ideal for cluster-native deployment inside Kubernetes:
 helm upgrade --install kubeclustersnap ./charts/kubeclustersnap --create-namespace -n kubeclustersnap
 ```
 
-Open **[http://localhost:30300](http://localhost:30300)** in your browser!
+- **Frontend Dashboard:** Open **[http://localhost:30300](http://localhost:30300)**
+- **Backend Control API:** **[http://localhost:30800](http://localhost:30800)**
 
 ---
 
