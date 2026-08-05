@@ -1,130 +1,100 @@
 # KubeClusterSnap — Visual Kubernetes Developer IDP & Real-Time Control Plane
 
-[![Kubernetes](https://img.shields.io/badge/Kubernetes-k3s%20%7C%20EKS%20%7C%20AKS-blue.svg?logo=kubernetes)](https://k3s.io)
-[![Latest Release](https://img.shields.io/badge/Release-v2.2.0-brightgreen.svg)](https://github.com/anilkumar2713/KubeClusterSnap-Storefront/releases/tag/v2.2.0)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-k3s%20%7C%20EKS%20%7C%20AKS%20%7C%20GKE-blue.svg?logo=kubernetes)](https://k3s.io)
+[![Docker Compose](https://img.shields.io/badge/Docker%20Compose-Supported-2496ED.svg?logo=docker)](https://docker.com)
+[![Latest Release](https://img.shields.io/badge/Release-v2.7.0-brightgreen.svg)](https://github.com/anilkumar2713/KubeClusterSnap-Storefront/releases/tag/v2.7.0)
 [![Edition](https://img.shields.io/badge/Edition-Community%20%26%20Enterprise-009688.svg)](#kubeclustersnap-editions)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#intellectual-property--licensing)
 
-**KubeClusterSnap** is the all-in-one visual Internal Developer Platform (IDP) and real-time control plane built for fast-moving developers, engineering leads, and growing tech companies. It eliminates Kubernetes friction by turning complex container orchestration into a sleek, 1-click self-service dashboard.
+**KubeClusterSnap** is the all-in-one visual Internal Developer Platform (IDP) and real-time control plane built for fast-moving developers, engineering leads, and growing tech companies. It turns complex container orchestration into a sleek, 1-click self-service dashboard with multi-cluster kubeconfig management, database volume state snapshotting, interactive container TTY shell access, and real-time observability.
+
+Now available with **Zero-Clone Installation**: Deploy natively inside Kubernetes via **`kubectl apply`** or **`helm install`**, or launch instantly anywhere via **`docker compose`** without cloning the repo!
 
 ---
 
-## 🚀 What's New in Release v2.2.0
+## 🚀 What's New in Release v2.7.0
 
-* **Interactive In-Browser Container Terminal (`kubectl exec` over WebSockets):** Open a live TTY shell directly inside running pod containers from the web UI (`xterm.js`).
-* **Multi-Namespace Helm Flexibility:** Seamlessly deploy KubeClusterSnap into any custom namespace (`testing`, `dev`, `prod`) using `.Release.Namespace`.
-* **Security Hardening:** Mandatory API key authentication middleware (`X-KubeClusterSnap-API-Key`) and RFC 1123 custom namespace sanitization.
+* **🚀 Deployment & Image Tag Sync Studio**: Monitor every container image tag (`nginx:latest`, `redis:alpine`, `node:18-alpine`) across all namespaces with 1-click interactive image tag updates and real-time sync state drift reconciliation.
+* **📦 Cluster Resources & Pods Control Center**: Aggregated 5-in-1 control center featuring dedicated sub-tabs for **Pods** (health matrix, logs, xterm exec shell, terminate pod), **Services** (ClusterIP/NodePort/LoadBalancer), **Ingress Routes** (host rules & backend targets), **Secrets & ConfigMaps** (with Reveal/Hide toggle), and **Port Forwards & Tunnels**.
+* **⚡ Single-Command Zero-Clone Deployments**: Deploy natively in any cluster or Docker engine with 1-command `kubectl apply`, `helm install`, or `docker compose` without cloning the repository!
+* **🗄️ Visual Database Studio**: Auto-detect, connect, and query PostgreSQL, MySQL, Redis, and MongoDB instances cluster-wide without leaving the dashboard.
+* **📸 Volume State Snapshotting**: Capture 1-click compressed tarball snapshots of live container data volumes and clone them into pre-hydrated preview environments.
 
-Read full release details in our [GitHub Release Notes](https://github.com/anilkumar2713/KubeClusterSnap-Storefront/releases/tag/v2.2.0).
+---
+
+## Quick Start & Deployment Options (Zero-Clone Installation)
+
+Deploy KubeClusterSnap into any Kubernetes cluster or local Docker engine with a **single command** without cloning the repo:
+
+### Option A: One-Command `kubectl apply` (Zero-Clone for Kubernetes)
+```bash
+kubectl apply -f https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/main/k8s/kubeclustersnap-all-in-one.yaml
+```
+- **Frontend Dashboard:** Open **[http://localhost:30333](http://localhost:30333)** (or your NodePort/Ingress IP)
+- **Backend Control API:** **[http://localhost:30888](http://localhost:30888)**
+
+---
+
+### Option B: One-Command `helm install` (Zero-Clone for Helm Users)
+```bash
+helm install kubeclustersnap https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/main/charts/kubeclustersnap-2.7.0.tgz --create-namespace -n kubeclustersnap-system
+```
+
+---
+
+### Option C: One-Command `docker compose` (Zero-Clone for Docker / Local / VM)
+```bash
+curl -sSL https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/main/docker-compose.prod.yml | docker compose -f - up -d
+```
+- **Frontend Dashboard:** Open **[http://localhost:30333](http://localhost:30333)**
+- **Backend Control API:** **[http://localhost:30888](http://localhost:30888)**
 
 ---
 
 ## What Problem Does KubeClusterSnap Solve?
 
-### 1. Eliminates Local Kubernetes Onboarding Friction
-* **The Problem:** Developers waste hours writing complex `kubectl` manifests, creating namespaces manually, configuring services, and debugging port forwarding just to run local preview environments.
-* **The Solution:** **1-Click Ephemeral Environments.** Developers can spin up isolated, multi-replica container workloads (NGINX, Redis, Node.js, microservices) in seconds with automated namespace isolation.
+### 1. Zero-Friction Deployment Choices (`kubectl`, `helm`, or `docker compose`)
+* **The Problem:** Non-Kubernetes users or teams testing control plane software don't want to set up Helm or in-cluster CRDs just to run a dashboard UI.
+* **The Solution:** **Zero-Clone Installation.** Deploy natively via `kubectl apply` or `helm` inside Kubernetes, or run standalone via Docker Compose (`docker compose up -d`) with mounted host kubeconfig access.
 
-### 2. Instant Visual Observability Without Heavy Setup
-* **The Problem:** Understanding how microservices communicate or finding out why a pod crashed requires digging through raw text logs or setting up heavy, expensive monitoring stacks.
-* **The Solution:** **Built-In Real-Time Control Plane.** Features interactive network topology DAG maps, PromQL CPU/Memory telemetry graphs, live WebSocket cluster event streams, and container stdout/stderr log tailing out-of-the-box.
+### 2. Multi-Cluster Fragmentation & Kubeconfig Switching Hassle
+* **The Problem:** Developers and DevOps engineers constantly juggle multiple terminal tabs, environment variables, and `kubectl config use-context` commands to manage dev, staging, and production clusters.
+* **The Solution:** **Unified Multi-Cluster Manager.** Import custom `.kube/config` files or paste YAML text directly in the UI. Switch active cluster context with 1-click from the Navbar dropdown.
 
-### 3. Developer Self-Service Control
-* **The Problem:** Developers rely on DevOps engineers for basic operations like scaling workloads, restarting deployments, or cleaning up test resources.
-* **The Solution:** **Self-Service Workload Control.** Developers can scale replicas, trigger zero-downtime rolling restarts, inspect live pod logs, run container terminals, and perform 1-click namespace teardowns safely.
+### 3. Solves Database & Test State Isolation (The "Snap" Engine)
+* **The Problem:** Developers spend hours generating mock data or trying to reproduce edge-case production bugs because test container environments start completely empty every time.
+* **The Solution:** **1-Click Volume Snapshotting & State Cloning.** Developers can take an instant snapshot of a populated database or application volume (Redis, Postgres, MySQL) and clone it into a brand-new, isolated environment pre-hydrated with the exact same data.
+
+### 4. Database Interrogation Friction (Visual Database Studio)
+* **The Problem:** Developers are forced to rely on external desktop tools like pgAdmin, MongoDB Compass, or RedisInsight, requiring tedious `kubectl port-forward` commands and separate credential management just to run a simple SQL query.
+* **The Solution:** **Built-in Visual Database Studio.** Instantly auto-detect, connect, and query PostgreSQL, MySQL, MongoDB, or Redis instances running anywhere in your cluster right from the web UI without leaving the dashboard or exposing ports.
+
+### 5. Cluster-Wide Troubleshooting Overhead (Cluster Resources Studio)
+* **The Problem:** When an incident happens, SREs and Developers have to run a series of complex `kubectl get pods -A | grep name` commands to find failing workloads, then manually kill or restart them.
+* **The Solution:** **Cluster Resources & Pods Studio.** Aggregates Pods, Services, Ingresses, Secrets, ConfigMaps, and Port-Forwards across your entire cluster into a single high-speed UI. You can kill pods (`kubectl delete pod`), trigger zero-downtime rolling restarts, view live container logs, or open an interactive terminal shell instantly from one screen.
 
 ---
 
-## KubeClusterSnap Editions
+## KubeClusterSnap Feature Matrix & Editions
 
 | Feature | Community Edition (Free) | Enterprise Edition (Production Teams) |
 | :--- | :---: | :---: |
-| **Local k3s Single Cluster Support** | ✅ Included | ✅ Included |
-| **Standard 1-Click Service Catalog** | ✅ Included | ✅ Included |
-| **Real-Time Telemetry & Metric Graphs** | ✅ Included | ✅ Included |
-| **Visual Network Topology Map** | ✅ Included | ✅ Included |
-| **Live Cluster Event Drawer & Pod Logs** | ✅ Included | ✅ Included |
-| **Interactive In-Browser Container Shell (xterm.js)** | ✅ Included | ✅ Included |
-| **Multi-Cluster Support (AWS EKS / Azure AKS / GCP GKE)** | ❌ | ✅ Included |
+| **Deployment & Image Tag Sync Studio (Interactive Image Updates & Force Sync)** | ✅ Included | ✅ Included |
+| **Cluster Resources Studio (Pods, Services, Ingress, Secrets, Port-Forwards)** | ✅ Included | ✅ Included |
+| **1-Command Zero-Clone Deployments (`kubectl`, `helm`, `docker compose`)** | ✅ Included | ✅ Included |
+| **Local k3s & Custom Kubeconfig Multi-Cluster Support** | ✅ Included | ✅ Included |
+| **1-Click Cluster Context Switcher Dropdown** | ✅ Included | ✅ Included |
+| **Standard 1-Click Service Catalog & Custom Container Provisioner** | ✅ Included | ✅ Included |
+| **Volume State Snapshotting & State Cloning ("Snap" Feature)** | ✅ Included | ✅ Included |
+| **Interactive In-Browser Container TTY Shell (`kubectl exec`)** | ✅ Included | ✅ Included |
+| **Real-Time Telemetry & PromQL Metric Graphs** | ✅ Included | ✅ Included |
+| **Visual Network Topology DAG Map (ReactFlow)** | ✅ Included | ✅ Included |
+| **Live Cluster Event Drawer & Container Log Inspector** | ✅ Included | ✅ Included |
+| **Production Multi-Cluster Mesh (AWS EKS / Azure AKS / GCP GKE)** | ❌ | ✅ Included |
 | **Single Sign-On (SSO / OIDC) & Audit Logging** | ❌ | ✅ Included |
 | **FinOps Auto-Sleep & TTL Garbage Collection**| ❌ | ✅ Included |
 | **Custom PromQL Dashboard Builder** | ❌ | ✅ Included |
-| **Production Helm Deployment & 24/7 SLA Support** | ❌ | ✅ Included |
-
----
-
-## Community Edition Quick Start & Lifecycle Guide (Helm)
-
-### 1. Installation & Upgrades via Helm (`helm upgrade --install`)
-
-Deploy or upgrade KubeClusterSnap in your Kubernetes cluster using our public Helm chart. The `--install` flag guarantees seamless initial installation AND future upgrades:
-
-```bash
-# Install or Upgrade KubeClusterSnap via Helm
-helm upgrade --install kubeclustersnap ./charts/kubeclustersnap --create-namespace -n kubeclustersnap
-```
-
-Open **[http://localhost:30300](http://localhost:30300)** in your browser to access the visual developer dashboard!
-
----
-
-### 2. Upgrading for Every New Release
-
-Whenever a new version of KubeClusterSnap is released (e.g. `v2.2.0`), run `helm upgrade --install`:
-
-```bash
-# Upgrade your deployment to the latest version
-helm upgrade --install kubeclustersnap ./charts/kubeclustersnap -n kubeclustersnap
-```
-
-#### Upgrading in Custom Namespaces (`dev`, `testing`, `prod`)
-
-```bash
-# Upgrade release in custom namespace (e.g., 'testing' or 'dev')
-helm upgrade --install kubeclustersnap ./charts/kubeclustersnap -n testing
-```
-
----
-
-### 3. Upgrading from Community to Enterprise (BYOL Key)
-
-To unlock Enterprise features on your existing deployment without reinstalling, pass your cryptographic License Key during `helm upgrade`:
-
-```bash
-# Unlock Enterprise Edition on existing deployment
-helm upgrade kubeclustersnap ./charts/kubeclustersnap \
-  -n kubeclustersnap \
-  --set licenseKey="KCS-ENT-YOURORGANIZATION-HASH"
-```
-
----
-
-### 4. Uninstalling / Cleanup
-
-To uninstall KubeClusterSnap and remove control plane resources:
-
-```bash
-# Uninstall KubeClusterSnap release
-helm uninstall kubeclustersnap -n kubeclustersnap
-```
-
----
-
-## Need Full-Scale Production Deployment or Enterprise Features?
-
-If your engineering team is scaling up and needs:
-* **Production Multi-Cluster Support** (AWS EKS, Azure AKS, Google Cloud GKE)
-* **Enterprise Single Sign-On (SSO)** & Role-Based Access Controls
-* **FinOps Cost Optimization** (Auto-sleep for idle preview environments)
-* **Custom Enterprise Helm Charts** tailored to your cloud infrastructure
-* **24/7 Dedicated SLA & Architecture Consultation**
-
-### Contact Sales & Enterprise Engineering
-
-Get in touch directly with our founder to unlock Enterprise licensing or request a custom cloud deployment architecture setup:
-
-* 📧 **Email:** [anilkumargottapu9@gmail.com](mailto:anilkumargottapu9@gmail.com)
-* 🌐 **Public Storefront:** [https://github.com/anilkumar2713/KubeClusterSnap-Storefront](https://github.com/anilkumar2713/KubeClusterSnap-Storefront)
+| **24/7 Dedicated SLA & Architecture Consultation** | ❌ | ✅ Included |
 
 ---
 

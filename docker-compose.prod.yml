@@ -1,0 +1,30 @@
+services:
+  backend:
+    image: ghcr.io/anilkumar2713/kubeclustersnap-backend:latest
+    container_name: kubeclustersnap-backend
+    restart: unless-stopped
+    ports:
+      - "30888:8000"
+    environment:
+      - KUBECLUSTERSNAP_LICENSE_KEY=KCS-ENT-PROD-3648F75762ED
+      - SNAPSHOT_DIR=/app/snapshots
+      - KUBECONFIG_DIR=/app/kubeconfigs
+    volumes:
+      - ${USERPROFILE:-~}/.kube/config:/root/.kube/config:ro
+      - kubeclustersnap-snapshots:/app/snapshots
+      - kubeclustersnap-kubeconfigs:/app/kubeconfigs
+
+  frontend:
+    image: ghcr.io/anilkumar2713/kubeclustersnap-frontend:latest
+    container_name: kubeclustersnap-frontend
+    restart: unless-stopped
+    ports:
+      - "30333:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:30888
+    depends_on:
+      - backend
+
+volumes:
+  kubeclustersnap-snapshots:
+  kubeclustersnap-kubeconfigs:
