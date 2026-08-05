@@ -23,7 +23,7 @@ That's why we created **KubeClusterSnap**.
 
 **KubeClusterSnap** is a high-density, real-time Kubernetes observability and control suite. It brings developer self-service to your infrastructure, giving you complete visibility and control over your application workloads across any Kubernetes cluster (`k3s`, `AWS EKS`, `Azure AKS`, `GCP GKE`, `Minikube`, or `Kind`).
 
-![KubeClusterSnap Architecture & Control Suite](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/main/docs/dashboard-preview.png)
+![KubeClusterSnap Overview Dashboard](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/master/docs/overview_dashboard.png)
 
 ---
 
@@ -34,6 +34,8 @@ That's why we created **KubeClusterSnap**.
 - **1-Click Image Tag Bumping**: Click any tag badge to update container image versions or SHA digests (`v2.4.0` → `v2.5.0`) interactively with automatic zero-downtime rolling updates.
 - **Sync & Drift Reconciliation**: Monitors deployment sync states (**`Synced`** vs **`OutOfSync`**) with a 1-click **`Sync Now`** button to align cluster state without touching YAML files.
 
+![Deployment & Image Sync Studio](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/master/docs/deployments_sync_studio.png)
+
 ---
 
 ### 2. 📦 Cluster Resources & Pod Debugger
@@ -41,6 +43,8 @@ That's why we created **KubeClusterSnap**.
 - **💻 In-Browser Terminal (`kubectl exec`)**: Open interactive full-screen xterm.js TTY terminal sessions inside any running container directly in your web browser over WebSockets.
 - **🪵 Live Container Log Inspector**: Stream stdout/stderr logs with real-time keyword filtering.
 - **💀 Terminate & Recreate**: 1-click pod deletion (`kubectl delete pod`) to test resilience or unfreeze stuck containers.
+
+![Cluster Resources & Pod Debugger](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/master/docs/cluster_resources_studio.png)
 
 ---
 
@@ -55,6 +59,8 @@ That's why we created **KubeClusterSnap**.
 ### 4. 🗄️ Built-in Visual Database Studio
 - **Automated DB Auto-Discovery**: Automatically detects and connects to PostgreSQL, MySQL, Redis, and MongoDB instances across all namespaces.
 - **SQL & NoSQL Query Console**: Execute queries, inspect collections, and browse Redis key spaces directly from the dashboard without external desktop apps or port-forwarding setup.
+
+![Visual Database Studio](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap/master/docs/database_studio_preview.png)
 
 ---
 
