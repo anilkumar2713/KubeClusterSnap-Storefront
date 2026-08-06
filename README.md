@@ -7,6 +7,8 @@
 
 **KubeClusterSnap V2.7.0** is a visual Internal Developer Platform (IDP) and high-density, real-time Kubernetes control plane designed to provision, clone, observe, and control ephemeral application workloads across multiple Kubernetes clusters. It combines automated container provisioning with a full **Visual Database Studio**, **Cluster-Wide Namespace & Workload Troubleshooting**, interactive container TTY shell terminals, PromQL telemetry, network topology DAGs, and WebSocket event tailing.
 
+![KubeClusterSnap Overview Dashboard](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/overview_dashboard.png)
+
 Deploy natively in Kubernetes via **Helm Chart** or launch standalone via **Docker Compose** (`docker compose up -d`).
 
 ---
@@ -58,6 +60,8 @@ Each section below provides a detailed breakdown of the internal components, cap
 
 ### 1. 🚀 Deployment & Container Image Tag Sync Studio (`Deployments & Sync`)
 
+![Deployment & Image Sync Studio](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/deployments_sync_studio.png)
+
 #### 🧩 Included Components & Architecture
 - **`SyncHeaderBanner`**: Displays total cluster deployment count, out-of-sync drift indicators, and cluster sync health metrics.
 - **`DeploymentTableCard`**: High-density grid detailing Deployment Name, Target Namespace, Active Container Image Tag Badge (`nginx:latest`, `node:18-alpine`), Replica Counts (`3/3`), Sync Status Badges (**`Synced`** vs **`OutOfSync`**), and control buttons (`Sync Now`, `Update Image`, `Scale`, `Restart`).
@@ -76,6 +80,8 @@ Each section below provides a detailed breakdown of the internal components, cap
 ---
 
 ### 2. 📦 Cluster Pods & Health Debugger (`Cluster Resources -> Pods`)
+
+![Pods & Health Debugger](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/cluster_resources_studio.png)
 
 #### 🧩 Included Components & Architecture
 - **`PodFilterBar`**: Namespace selector dropdown and health state filter pills (**`All Pods`**, **`Healthy Running`**, **`Crashing/Error`**, **`Pending`**).
@@ -97,6 +103,8 @@ Each section below provides a detailed breakdown of the internal components, cap
 
 ### 3. 🔌 Kubernetes Services Registry (`Cluster Resources -> Services`)
 
+![Kubernetes Services Registry](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_services.png)
+
 #### 🧩 Included Components & Architecture
 - **`ServicesTable`**: Displays Service Name, Namespace, Service Type (**`ClusterIP`**, **`NodePort`**, **`LoadBalancer`**), Cluster IP address, External/Node Ports, and Target Ports.
 - **`SelectorTagList`**: Visual pill badges displaying service selector key-value pairs (`app=backend`, `tier=api`).
@@ -111,6 +119,8 @@ Each section below provides a detailed breakdown of the internal components, cap
 ---
 
 ### 4. 🌐 Ingress Routes & Traffic Controller (`Cluster Resources -> Ingress Routes`)
+
+![Ingress Routes Controller](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_ingress.png)
 
 #### 🧩 Included Components & Architecture
 - **`IngressTable`**: Displays Ingress Name, Namespace, Class/Controller, Host Domain Rules, HTTP Path Maps (`/api` → `backend-svc:8000`), Target Backend Ports, and TLS Security status.
@@ -127,6 +137,8 @@ Each section below provides a detailed breakdown of the internal components, cap
 
 ### 5. 🔐 Secrets & ConfigMaps Security Store (`Cluster Resources -> Secrets & ConfigMaps`)
 
+![Secrets & ConfigMaps Security Store](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_configs.png)
+
 #### 🧩 Included Components & Architecture
 - **`ConfigSecretTable`**: Displays Name, Namespace, Resource Type (**`Secret`** vs **`ConfigMap`**), Data Key Count, Creation Date, and interactive **`Reveal Keys`** / **`Hide Keys`** toggle buttons.
 - **`KeyInspectorModal`**: Masked key listing with 1-click reveal to safely inspect key-value pairs (`DATABASE_URL`, `API_KEY`).
@@ -142,6 +154,8 @@ Each section below provides a detailed breakdown of the internal components, cap
 
 ### 6. 🔀 Port Forwards & Local Tunnels Studio (`Cluster Resources -> Port Forwards`)
 
+![Port Forwards & Tunnels Studio](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_portforwards.png)
+
 #### 🧩 Included Components & Architecture
 - **`TunnelManagerTable`**: Displays Active Session ID, Target Pod/Service, Namespace, Local Tunnel URL (`http://localhost:30888`), Target Container Port, Status (**`Active`**), and **`Stop Tunnel`** action button.
 
@@ -156,6 +170,8 @@ Each section below provides a detailed breakdown of the internal components, cap
 
 ### 7. 🗄️ Visual Database Studio (`Databases Studio`)
 
+![Visual Database Studio](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/database_studio_preview.png)
+
 #### 🧩 Included Components & Architecture
 - **`DBDiscoveryBanner`**: Automatically detects PostgreSQL, MySQL, Redis, and MongoDB instances running anywhere in the cluster.
 - **`QueryConsole`**: Built-in SQL and NoSQL query console for executing queries, inspecting collections, browsing Redis keys, and analyzing DB latency.
@@ -168,7 +184,18 @@ Each section below provides a detailed breakdown of the internal components, cap
 
 ---
 
-### 8. 📸 Volume State Snapshotting & Cloning (`Snap Engine`)
+### 8. 🕸️ Network Architecture & Telemetry (`Network & Telemetry`)
+
+![Network Architecture Topology Map](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_network.png)
+![Telemetry & PromQL Metrics Dashboard](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_telemetry.png)
+
+#### 🧩 Included Components & Architecture
+- **`TopologyGraph`**: ReactFlow dependency graph rendering microservice nodes and network flow edges.
+- **`TelemetryGauges`**: PromQL CPU, Memory, and Restart Rate telemetry metrics.
+
+---
+
+### 9. 📸 Volume State Snapshotting & Cloning (`Snap Engine`)
 
 #### 🧩 Included Components & Architecture
 - **`SnapshotManager`**: 1-click compressed tarball snapshot engine for container volume data paths (`/var/lib/mysql`, `/data`).
