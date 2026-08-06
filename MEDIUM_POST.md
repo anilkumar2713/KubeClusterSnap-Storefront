@@ -49,10 +49,26 @@ That's why we created **KubeClusterSnap**.
 ---
 
 ### 3. 🔌 Services, Ingress, Secrets & Tunnels
-- **Services Registry**: Inspect `ClusterIP`, `NodePort`, and `LoadBalancer` services, Cluster IPs, target ports, and selector tags.
-- **Ingress Routes Controller**: View exposed host domains, HTTP path maps (`/api` → `backend-svc`), and TLS certificate security status.
-- **Secrets & ConfigMaps Security Store**: Inspect ConfigMaps and Secrets with secure **`Reveal Keys`** / **`Hide Keys`** toggle controls.
-- **Port Forwards & Tunnels Studio**: Manage active local port-forwarding sessions (`http://localhost:30888`) and close tunnels with one click.
+
+#### 🔌 Kubernetes Services Registry
+Inspect `ClusterIP`, `NodePort`, and `LoadBalancer` services, Cluster IPs, target ports, and selector tags across all namespaces.
+
+![Kubernetes Services Registry](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_services.png)
+
+#### 🌐 Ingress Routes & Traffic Controller
+View exposed host domains, HTTP path maps (`/api` → `backend-svc`), and TLS certificate security status.
+
+![Ingress Routes Controller](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_ingress.png)
+
+#### 🔐 Secrets & ConfigMaps Security Store
+Inspect ConfigMaps and Secrets key counts with secure **`Reveal Keys`** / **`Hide Keys`** toggle controls.
+
+![Secrets & ConfigMaps Security Store](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_configs.png)
+
+#### 🔀 Port Forwards & Local Tunnels Studio
+Manage active local port-forwarding sessions (`http://localhost:30888`) and close tunnels with one click.
+
+![Port Forwards & Tunnels Studio](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_portforwards.png)
 
 ---
 
@@ -64,7 +80,16 @@ That's why we created **KubeClusterSnap**.
 
 ---
 
-### 5. 📸 Volume State Snapshotting & Cloning ("Snap" Engine)
+### 5. 🕸️ Network Topology & PromQL Telemetry
+- **Visual DAG Topology Map**: View real-time service dependency graphs (ReactFlow) connecting microservices and pods.
+- **PromQL Metrics Dashboard**: Real-time CPU, Memory, and Restart Rate gauge charts powered by Prometheus metrics.
+
+![Network Architecture Topology Map](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_network.png)
+![Telemetry & PromQL Metrics Dashboard](https://raw.githubusercontent.com/anilkumar2713/KubeClusterSnap-Storefront/master/docs/real_telemetry.png)
+
+---
+
+### 6. 📸 Volume State Snapshotting & Cloning ("Snap" Engine)
 - **1-Click Tarball Snapshotting**: Capture compressed volume snapshot archives from live container data directories (`/data`, `/var/lib/mysql`).
 - **Pre-Hydrated Preview Environments**: Instantly launch isolated container environments populated with real volume snapshot data for instant bug reproduction.
 
